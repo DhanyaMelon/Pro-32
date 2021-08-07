@@ -15,19 +15,19 @@ var blowerMouth;
 var button
 
 function setup() {
-  createCanvas(500,700);
-
-  ball = new Ball(200,50,20,20);
-  blower = new Blower(200,150,50,10);
-  blowerMouth = new BlowerMouth(200, 500, 40,10);
+  createCanvas(500,500);
 
   engine = Engine.create();
   world = engine.world;
-  
+
+  ball = new Ball(width/2 + 80,height/2 - 80,80,80);
+  blower = new Blower(width/2 - 50,height/2 + 50,150,20);
+  blowerMouth = new BlowerMouth(width/2 + 70, height/2 +20, 100,90);
+ 
   button = createButton('Click to Blow');
   button.position(width/2,height-100);
   button.class("blowButton")
-  button.mouseClicked(Blow);
+  button.mouseClicked(blow);
 
 
 }
@@ -35,17 +35,15 @@ function setup() {
 function draw() 
 {
   background(51);
-  
+  Engine.update(engine);
+
   ball.show();
   blower.show();
   blowerMouth.show();
-
-  Engine.update(engine);
-  
 }
 
-function Blow(){
-  Matter.Body.applyForce(fruit,{x:0,y:0},{x:0,y:0.5});
+function blow(){
+  Matter.Body.applyForce(ball.body,{x:0,y:0},{x:0,y:0.05});
   
   }
 
